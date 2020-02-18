@@ -1,3 +1,4 @@
+/*aqui se accede a las variables necesarias*/
 const express = require('express');
 const Document = require('../models/document');
 const path = require('path');
@@ -8,6 +9,8 @@ var multer = require('multer')({
 });
 
 const router = express.Router();
+
+/*cloudinary permite la manipulacion de imagenes y videos para aplicaciones de la mejor calidad */
 var cloudinary = require('cloudinary');
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
@@ -16,6 +19,10 @@ cloudinary.config({
 });
 
 //-----------------------------------------Document------------------------------------------------
+/*aqui se definen las rutas posibles dentro de un documento
+* ya sea para buscar cada documento,
+* buscar un documento por numero de caso.
+* Ademas permite hacer la peticion de crear, eliminar, ver  y modificar un documento*/
 router.get('/document', function(req, res, next) {
 	Document.find({}).then(function(Document){
 		res.json({'Document' : Document});
@@ -81,7 +88,7 @@ router.post('/document-web-case', [multer.single('url')], function(req, res, nex
 			}
 	});
 });
-
+/*permite reestablecer el nombre del documento*/
 function storeWithOriginalName (file) {
   var fullNewPath = path.join(file.destination, file.originalname)
   var rename = util.promisify(fs.rename)

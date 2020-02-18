@@ -1,9 +1,14 @@
+/*aqui se accedes a las variables necesarias creadas a partir del modelo*/
 const express = require('express');
 const Court = require('../models/court');
 
 const router = express.Router();
 
 //-----------------------------------------Court------------------------------------------------
+/*aqui se definen las rutas posibles dentro de tribunal
+* ya sea para buscar cada tribunal,
+* buscar tribunal por identificador.
+* Ademas permite hacer la peticion de crear, eliminar, ver  y modificar un tribunal*/
 router.get('/court', function(req, res, next) {
 	Court.find({}).then(function(Court){
 		res.json({'Court' : Court});

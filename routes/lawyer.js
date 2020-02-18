@@ -1,3 +1,4 @@
+/*se accede a las variables necesarias*/
 const express = require('express');
 const Lawyer = require('../models/lawyer');
 const bcrypt = require('bcrypt-nodejs');
@@ -8,6 +9,9 @@ var util = require('util')
 var multer = require('multer')({
    dest: 'public/uploads'
 });
+
+/*se utiliza router para el enrutamiento de la aplicacion y
+* cloudinary para la manipulacion de imagenes y videos*/
 const router = express.Router();
 var cloudinary = require('cloudinary');
 cloudinary.config({ 
@@ -18,7 +22,10 @@ cloudinary.config({
 
 
 //-----------------------------------------Lawyer----------------------------------------------
-
+/*aqui se definen las rutas posibles dentro de abogado
+* ya sea para buscar cada abogado,
+* Ademas permite hacer la peticion de crear, eliminar, ver  y modificar un abogado
+* asi como tambien establecer sesiones*/
 router.get('/lawyer', function(req, res, next) {
 	Lawyer.find({}).then(function(Lawyer){
 		res.json({'Lawyer' : Lawyer});

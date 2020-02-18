@@ -1,10 +1,14 @@
+/*se accede a las variables necesarias de cada modelo creado*/
 const express = require('express');
 const Client = require('../models/client');
 
 const router = express.Router();
 
 //-----------------------------------------Client------------------------------------------------
-
+/*aqui se definen las rutas posibles dentro de cliente
+* ya sea para buscar cada cliente,
+* buscar cliente por identificador.
+* Ademas permite hacer la peticion de crear, eliminar, ver  y modificar un cliente */
 router.get('/client', function(req, res, next) {
 	Client.find({}).then(function(Client){
 		res.json({'Client' : Client});

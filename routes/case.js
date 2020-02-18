@@ -1,3 +1,4 @@
+/*aqui se accede a las variables*/
 const express = require('express');
 const Case = require('../models/case');
 const Document = require('../models/document');
@@ -10,6 +11,10 @@ cloudinary.config({
   api_secret: process.env.API_SECRET 
 });
 //----------------------------------------Case-----------------------------------------------
+/*aqui se definen las rutas posibles dentro de caso
+* ya sea para buscar cada caso,
+* buscar caso por identificador.
+* Ademas permite ahcer la peticion de crear, eliminar, ver  y modificar un caso */
 router.get('/case', function(req, res, next) {
 	Case.find({}).then(function(Case){
 		res.json({'Case' : Case});
