@@ -1,6 +1,15 @@
+/*En este fichero, se crea el modelo de datos para cada caso,
+* el cual se compone de:
+* nombre de tipo string
+* numero de tipo string
+* fecha inicio de tipo date
+* fecha fin de tipo date
+* tribunal de tipo string
+* id de abogado de tipo string
+* id de cliente de tipo string*/
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+/*Creacion del esquema que define el  modelo propuesto anteriormente*/
 var CaseSchema = new Schema({
 	name:{
 		type: String,

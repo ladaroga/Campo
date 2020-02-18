@@ -1,6 +1,12 @@
+/*En este fichero, se crea el modelo de datos para cada cliente,
+* el cual se compone de:
+* nombre de tipo string
+* direccion de tipo string
+* tipo de tipo string
+* telefono de tipo string*/
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+/*Creacion del esquema que define el  modelo propuesto anteriormente*/
 var CourtSchema = new Schema({
 	name:{
 		type: String,

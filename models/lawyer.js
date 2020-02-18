@@ -1,6 +1,16 @@
+/*En este fichero, se crea el modelo de datos para cada cliente,
+* el cual se compone de:
+* identificacion de tipo string
+* nombre de tipo string
+* especialidad de tipo string
+* telefono de tipo string
+* email de tipo string
+* password de tipo string
+* avatar de tipo string
+* imagen de tipo string*/
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+/*Creacion del esquema que define el  modelo propuesto anteriormente*/
 var LawyerSchema = new Schema({
 	identification:{
 		type: String,
