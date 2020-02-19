@@ -1,9 +1,9 @@
 $(document).foundation();
-
+/*Esta funcion se define para emitir un mensaje de alerta cuando se ha agregado correctamente*/
 function showSuccessMessage(){
 	alert("Agregado");
 }
-
+/*Esta funcion permite eliminar un documento a traves de su identificador*/
 function deleteDoc(id){
   $.ajax({
     url: '/document-web/' + id,
@@ -11,7 +11,7 @@ function deleteDoc(id){
   });
   location.reload();
 }
-
+/*Esta funcion permite eliminar un caso a traves de su identificador*/
 function deleteCase(id){
   $.ajax({
     url: '/case-web/' + id,
@@ -19,51 +19,35 @@ function deleteCase(id){
   });
   location.reload();
 }
-
+/*Esta funcion permite buscar un caso y mostrarlo en una tabla*/
 $("#searchCase").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#tableDoc tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-/*$("button[name*='caseForm']").click(  function () {
-  var sendData = $("form[name*='formCase']").serializeArray();
-  console.log(sendData);
-  $.ajax({
-    url: '/case-web/' + $("input[name*='id']").val(),    //Your api url
-    type: 'PUT',   //type is any HTTP method
-    data: {
-      data: sendData
-    },      //Data as js object
-    success: function () {
-      $.get("/details/" + $("input[name*='id']").val(), function(data, status){
-        
-    });
-    },
-    error: alert("Error al actualizar")
-  });
-});*/
 
+/*Esta funcion permite hacer modificaciones y validacion de los campos a traves de la funcion regex */
 function changeType(x, type) {
   if(x.prop('type') == type)
   return x; //That was easy.
   try {
-    return x.prop('type', type); //Stupid IE security will not allow this
+    return x.prop('type', type);
   } catch(e) {
-    //Try re-creating the element (yep... this sucks)
-    //jQuery has no html() method for the element, so we have to put into a div first
+    /*Intenta volver a crear el elemento
+    jQuery no tiene un método html () para el elemento, por lo que primero se coloca en un div*/
     var html = $("<div>").append(x.clone()).html();
     var regex = /type=(\")?([^\"\s]+)(\")?/; //matches type=text or type="text"
-    //If no match, we add the type attribute to the end; otherwise, we replace
+    /*Si no hay coincidencia,  se agregamos el atributo type al final; de lo contrario, se reemplaza*/
     var tmp = $(html.match(regex) == null ?
       html.replace(">", ' type="' + type + '">') :
       html.replace(regex, 'type="' + type + '"') );
-    //Copy data from old element
+    /* aqui se copian los datos del elemento antiguo*/
     tmp.data('type', x.data('type') );
     var events = x.data('events');
     var cb = function(events) {
       return function() {
-            //Bind all prior events
+        /*Vincula todos los eventos anteriores*/
             for(i in events)
             {
               var y = events[i];
@@ -73,7 +57,8 @@ function changeType(x, type) {
           }
         }(events);
         x.replaceWith(tmp);
-    setTimeout(cb, 10); //Wait a bit to call function
+        /*Define un tiempo de espera para llamar la funcion*/
+    setTimeout(cb, 10);
     return tmp;
   }
 }
